@@ -130,7 +130,8 @@ const rules = reactive({
     }
   ],
   level: [{ required: true, message: '客户级别不能为空', trigger: 'blur' }],
-  source: [{ required: true, message: '客户来源不能为空', trigger: 'blur' }]
+  source: [{ required: true, message: '客户来源不能为空', trigger: 'blur' }],
+  followStatus: [{ required: true, message: '请选择跟进状态', trigger: 'change' }]
 })
 const ruleFormRef = ref<FormInstance>()
 
