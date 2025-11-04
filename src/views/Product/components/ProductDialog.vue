@@ -18,29 +18,33 @@
         :hide-required-asterisk="dialogProps.isView"
       >
         <el-form-item label="商品名称" prop="name">
-          <el-input v-model="dialogProps.row.name" placeholder="请填写商品名称" clearable maxlength="50" show-word-limit></el-input>
+          <el-input v-model="dialogProps.row!.name" placeholder="请填写商品名称" clearable maxlength="50" show-word-limit></el-input>
         </el-form-item>
-        <el-form-item label="商品价格" prop="price">
-          <el-input v-model="dialogProps.row.price" placeholder="请填写商品价格" type="number" clearable maxlength="10" show-word-limit></el-input>
-        </el-form-item>
-        <el-form-item label="商品库存" prop="stock">
-          <el-input v-model="dialogProps.row.stock" placeholder="请填写商品库存" clearable maxlength="100" show-word-limit></el-input>
-        </el-form-item>
+        <div class="flex">
+          <el-form-item label="商品价格" prop="price">
+            <el-input v-model="dialogProps.row!.price" placeholder="请填写商品价格" type="number" clearable maxlength="10" show-word-limit></el-input>
+          </el-form-item>
+          <el-form-item label="商品库存" prop="stock">
+            <el-input v-model="dialogProps.row!.stock" placeholder="请填写商品库存" clearable maxlength="100" show-word-limit></el-input>
+          </el-form-item>
+        </div>
         <el-form-item label="商品状态" prop="status">
-          <el-select v-model="dialogProps.row.status" filterable placeholder="请选择商品状态" class="w-full">
+          <el-select v-model="dialogProps.row!.status" filterable placeholder="请选择商品状态" class="w-full">
             <el-option v-for="item in Object.values(ProductStatusList)" :key="item.value" :label="item.label" :value="item.value" class="isabel-option" />
           </el-select>
         </el-form-item>
         <el-form-item label="商品封面图" prop="coverImage">
-          <UploadImg v-model:image-url="dialogProps.row.coverImage" width="135px" height="135px" :file-size="5">
+          <UploadImg v-model:image-url="dialogProps.row!.coverImage" width="135px" height="135px" :file-size="5">
             <template #empty>
-              <el-icon><Avatar /></el-icon>
+              <el-icon>
+                <Avatar />
+              </el-icon>
               <span>请上传商品封面图</span>
             </template>
           </UploadImg>
         </el-form-item>
         <el-form-item label="商品简介" prop="description">
-          <el-input v-model="dialogProps.row.description" placeholder="请填写商品简介" clearable maxlength="100" show-word-limit type="textarea"></el-input>
+          <el-input v-model="dialogProps.row!.description" placeholder="请填写商品简介" clearable maxlength="100" show-word-limit type="textarea"></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -59,7 +63,6 @@ import { ElMessage, FormInstance } from 'element-plus'
 import { Dialog } from '@/components/Dialog'
 import { ProductStatusList } from '@/configs/enum'
 import UploadImg from '@/components/Upload/Img.vue'
-
 interface DialogProps {
   title: string
   isView: boolean
@@ -76,7 +79,7 @@ const dialogProps = ref<DialogProps>({
   title: '',
   row: {},
   labelWidth: 120,
-  fullscreen: true,
+  fullscreen: false,
   maxHeight: '500px'
 })
 

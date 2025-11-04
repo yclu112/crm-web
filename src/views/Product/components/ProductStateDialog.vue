@@ -1,5 +1,12 @@
 <template>
-  <Dialog v-model="dialogVisible" :title="dialogProps.title" :fullscreen="dialogProps.fullscreen" :max-height="dialogProps.maxHeight" :cancel-dialog="cancelDialog" width="35%">
+  <Dialog
+    :model-value="dialogVisible"
+    :title="dialogProps.title"
+    :fullscreen="dialogProps.fullscreen"
+    :max-height="dialogProps.maxHeight"
+    :cancel-dialog="cancelDialog"
+    width="35%"
+  >
     <div :style="'width: calc(100% - ' + dialogProps.labelWidth! / 2 + 'px)'">
       <el-form
         ref="ruleFormRef"
@@ -14,16 +21,18 @@
           <el-date-picker
             v-model="dialogProps.row.time"
             type="datetime"
-            :placeholder="'请选择' + dialogProps.title + '时间'"
+            :placeholder="`请选择${dialogProps.title}时间`"
             value-format="YYYY-MM-DD HH:mm:ss"
-            :disabled-date="(time) => time.getTime() < Date.now() - 864e5"
+            :disabled-date="(time) => time.getTime() < Date.now() - 8.64e7"
           />
         </el-form-item>
       </el-form>
     </div>
     <template #footer>
-      <el-button @click="cancelDialog">取消</el-button>
-      <el-button type="primary" v-show="!dialogProps.isView" @click="handleSubmit">确定</el-button>
+      <slot name="footer">
+        <el-button @click="cancelDialog">取消</el-button>
+        <el-button type="primary" v-show="!dialogProps.isView" @click="handleSubmit">确定</el-button>
+      </slot>
     </template>
   </Dialog>
 </template>
@@ -32,7 +41,6 @@
 import { ref, computed } from 'vue'
 import { dayjs, ElMessage, FormInstance } from 'element-plus'
 import { Dialog } from '@/components/Dialog'
-
 interface DialogProps {
   title: string
   isView: boolean
@@ -43,14 +51,13 @@ interface DialogProps {
   api?: (params: any) => Promise<any>
   getTableList?: () => Promise<any>
 }
-
 const dialogVisible = ref(false)
 const dialogProps = ref<DialogProps>({
   isView: false,
   title: '',
   row: {},
   labelWidth: 160,
-  fullscreen: true,
+  fullscreen: false,
   maxHeight: '500px'
 })
 
@@ -58,7 +65,7 @@ const dialogProps = ref<DialogProps>({
 const acceptParams = (params: DialogProps): void => {
   params.row = { ...dialogProps.value.row, ...params.row }
   dialogProps.value = { ...dialogProps.value, ...params }
-  if (dialogProps.value.title === '商品定时上架') {
+  if (dialogProps.value.title === '商品上架') {
     dialogProps.value.row.time = dialogProps.value.row.onShelfTime
   } else {
     dialogProps.value.row.time = dialogProps.value.row.offShelfTime
@@ -69,7 +76,6 @@ const acceptParams = (params: DialogProps): void => {
 defineExpose({
   acceptParams
 })
-
 const rules = computed(() => ({
   time: [
     {
@@ -78,7 +84,7 @@ const rules = computed(() => ({
       trigger: 'blur'
     },
     {
-      validator: (rule: any, value: any, callback: any) => {
+      validator: (rule, value, callback) => {
         if (!value) {
           return callback(new Error(`请选择${dialogProps.value.title}时间`))
         }
@@ -87,6 +93,7 @@ const rules = computed(() => ({
         if (selected.isBefore(now, 'minute')) {
           return callback(new Error(`${dialogProps.value.title}时间不能早于当前时间`))
         }
+
         callback() // 校验通过
       },
       trigger: 'change'
@@ -97,7 +104,7 @@ const rules = computed(() => ({
 const ruleFormRef = ref<FormInstance>()
 
 const handleSubmit = () => {
-  ruleFormRef.value?.validate(async (valid) => {
+  ruleFormRef.value!.validate(async (valid) => {
     if (!valid) return
     try {
       delete dialogProps.value.row['updateTime']
@@ -111,20 +118,19 @@ const handleSubmit = () => {
       ElMessage.success({ message: `${dialogProps.value.title}成功！` })
       dialogProps.value.getTableList!()
       dialogVisible.value = false
-      ruleFormRef.value?.resetFields()
+      ruleFormRef.value!.resetFields()
       cancelDialog(true)
     } catch (error) {
       console.log(error)
     }
   })
 }
-
 const cancelDialog = (isClean?: boolean) => {
   dialogVisible.value = false
   let condition = ['查看', '编辑']
   if (condition.includes(dialogProps.value.title) || isClean) {
     dialogProps.value.row = {}
-    ruleFormRef.value?.resetFields()
+    ruleFormRef.value!.resetFields()
   }
 }
 </script>
