@@ -6,5 +6,6 @@ import { COMMON_ADMIN_API } from '@/api/axios/servicePort'
  */
 export const ContractApi = {
   page: (params: any) => http.post(COMMON_ADMIN_API + '/contract/page', params),
-  saveOrEdit: (params: any) => http.post(COMMON_ADMIN_API + '/contract/saveOrUpdate', params)
+  saveOrEdit: (params: any) => http.post(COMMON_ADMIN_API + '/contract/saveOrUpdate', params),
+  trendData: (params: any) => http.post(COMMON_ADMIN_API + '/contract/getContractTrendData', params)
 }

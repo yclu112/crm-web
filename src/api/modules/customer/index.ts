@@ -10,6 +10,7 @@ export const CustomerApi = {
   saveOrEdit: (params: any) => http.post(COMMON_ADMIN_API + '/customer/saveOrUpdate', params),
   remove: (params: any) => http.post(COMMON_ADMIN_API + '/customer/remove', params),
   export: (params: any) => http.post(COMMON_ADMIN_API + '/customer/export', params, { responseType: 'blob' }),
-  toPublic: (params: any) => http.post(COMMON_ADMIN_API + '/customer/toPublic', params),
-  toPrivate: (params: any) => http.post(COMMON_ADMIN_API + '/customer/toPrivate', params)
+  toPublic: (params: any) => http.post(COMMON_ADMIN_API + '/customer/topublic', params),
+  toPrivate: (params: any) => http.post(COMMON_ADMIN_API + '/customer/topPrivate', params),
+  trendData: (params: any) => http.post(COMMON_ADMIN_API + '/customer/getCustomerTrendData', params)
 }

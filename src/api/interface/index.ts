@@ -117,3 +117,7 @@ export namespace Forum {
     nickname: string
   }
 }
+export interface TradeArray {
+  timelist: string[]
+  countList?: number[]
+}
