@@ -23,6 +23,10 @@
         <el-form-item v-if="dialogProps.title !== '重置'" label="昵称" prop="nickname">
           <el-input v-model="dialogProps.row!.nickname" placeholder="请填写昵称（2-20字）" clearable></el-input>
         </el-form-item>
+        <!-- 新增邮箱输入框 -->
+        <el-form-item v-if="dialogProps.title !== '重置'" label="邮箱" prop="email">
+          <el-input v-model="dialogProps.row!.email" placeholder="请填写邮箱（用于接收合同审核通知）" clearable></el-input>
+        </el-form-item>
         <el-form-item v-if="dialogProps.title === '新增' || dialogProps.title === '重置'" label="密码" prop="password">
           <el-input v-model="dialogProps.row!.password" show-password type="password" placeholder="请填写密码"></el-input>
         </el-form-item>
@@ -69,6 +73,9 @@ import { getRoleList } from '@/api/modules/role'
 import { getManagerInfoApi } from '@/api/modules/manager'
 import { useAppStoreWithOut } from '@/store/modules/app'
 import { useDepartmentStore } from '@/store/modules/department'
+const departmentStore = useDepartmentStore()
+const departmentList = departmentStore.departmentList
+
 const appStore = useAppStoreWithOut()
 interface DialogProps {
   title: string
@@ -85,13 +92,11 @@ const dialogVisible = ref(false)
 const dialogProps = ref<DialogProps>({
   isView: false,
   title: '',
-  row: { status: 1, type: 0 },
+  row: { status: 1, type: 0, email: '' },
   labelWidth: 160,
   fullscreen: false,
   maxHeight: '500px'
 })
-const departmentStore = useDepartmentStore()
-const departmentList = departmentStore.departmentList
 
 // 接收父组件传过来的参数
 const acceptParams = (params: DialogProps): void => {
@@ -149,7 +154,12 @@ const rules = reactive({
   ],
   roleId: [{ required: true, message: '请选择角色', trigger: 'change' }],
   status: [{ required: true, message: '请选择状态', trigger: 'change' }],
-  type: [{ required: true, message: '请选择账号类型', trigger: 'change' }]
+  type: [{ required: true, message: '请选择账号类型', trigger: 'change' }],
+  // 表单校验规则（添加邮箱校验）
+  email: [
+    { required: true, message: '请输入邮箱', trigger: 'blur' },
+    { type: 'email', message: '请输入正确的邮箱格式（如：xxx@example.com）', trigger: 'blur' }
+  ]
 })
 const ruleFormRef = ref<FormInstance>()
 const handleSubmit = () => {

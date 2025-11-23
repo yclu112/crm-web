@@ -1,0 +1,1 @@
+import{J as s,K as a}from"./index-6dfdc0ee.js";const e=e=>s.post(a+"/sys/manager/page",e),o=e=>s.post(a+"/sys/manager/add",e),n=e=>s.post(a+"/sys/manager/edit",e),r=e=>s.post(a+"/sys/manager/remove",e),g=e=>s.post(a+"/sys/manager/changePassword",e),t=()=>s.post(a+"/sys/manager/getManagerInfo",{},{headers:{noLoading:!0}});export{e as a,o as b,g as c,r as d,n as e,t as g};

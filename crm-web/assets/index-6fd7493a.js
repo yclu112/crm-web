@@ -1,0 +1,1 @@
+import{J as t,K as a}from"./index-6dfdc0ee.js";const o={page:o=>t.post(a+"/contract/page",o),saveOrEdit:o=>t.post(a+"/contract/saveOrUpdate",o),trendData:o=>t.post(a+"/contract/getContractTrendData",o),startApproval:o=>t.post(a+"/contract/startApproval",o),approvalContract:o=>t.post(a+"/contract/approvalContract",o)};export{o as C};

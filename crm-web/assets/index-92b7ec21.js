@@ -1,0 +1,1 @@
+import{J as s,K as o}from"./index-6dfdc0ee.js";const e=e=>s.post(o+"/sys/role/page",e),a=()=>s.post(o+"/sys/role/list"),r=e=>s.post(o+"/sys/role/add",e),t=e=>s.post(o+"/sys/role/edit",e),p=e=>s.post(o+"/sys/role/remove",e),d=e=>s.post(o+"/sys/role/menu",e,{headers:{noLoading:!0}});export{e as a,r as b,d as c,p as d,t as e,a as g};

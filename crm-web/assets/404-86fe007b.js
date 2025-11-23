@@ -1,0 +1,1 @@
+import{E as r}from"./Error-e88c9282.js";import{d as s,P as o,R as a,o as e,h as t,u as p}from"./index-6dfdc0ee.js";import"./_plugin-vue_export-helper-1b428a4d.js";const m=s({__name:"404",setup(s){const{push:m}=o(),n=a(),u=()=>{m(n.homePath)};return(s,o)=>(e(),t(p(r),{onErrorClick:u}))}});export{m as default};

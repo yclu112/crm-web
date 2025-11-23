@@ -54,7 +54,6 @@ const initChart = () => {
   const option = {
     title: {
       text: '合同数量分布',
-      subtext: '2025年1-10月',
       left: 'center'
     },
     tooltip: {

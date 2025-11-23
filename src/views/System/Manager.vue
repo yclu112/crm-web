@@ -71,6 +71,13 @@ const columns: ColumnProps<SysManager.ResManagerList>[] = [
     label: '用户名',
     search: { el: 'input' }
   },
+  // 新增邮箱列
+  {
+    prop: 'email',
+    label: '邮箱',
+    search: { el: 'input' }, // 支持通过邮箱搜索
+    minWidth: 180
+  },
   {
     prop: 'nickname',
     label: '昵称',
@@ -78,7 +85,6 @@ const columns: ColumnProps<SysManager.ResManagerList>[] = [
   },
   {
     prop: 'roleId',
-    tag: true,
     label: '角色',
     enum: getRoleList,
     fieldNames: { label: 'name', value: 'id' },

@@ -1,0 +1,1 @@
+import{I as e,z as t}from"./index-6dfdc0ee.js";const n=(n,s,a,r="warning")=>new Promise((o,c)=>{e.confirm(`是否${a}?`,"温馨提示",{confirmButtonText:"确定",cancelButtonText:"取消",type:r,draggable:!0}).then(async()=>{if(!(await n(s)))return c(!1);t({type:"success",message:`${a}成功!`}),o(!0)})});export{n as u};
