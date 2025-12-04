@@ -9,5 +9,6 @@ export const ContractApi = {
   saveOrEdit: (params: any) => http.post(COMMON_ADMIN_API + '/contract/saveOrUpdate', params),
   trendData: (params: any) => http.post(COMMON_ADMIN_API + '/contract/getContractTrendData', params),
   startApproval: (params: any) => http.post(COMMON_ADMIN_API + '/contract/startApproval', params),
-  approvalContract: (params: any) => http.post(COMMON_ADMIN_API + '/contract/approvalContract', params)
+  approvalContract: (params: any) => http.post(COMMON_ADMIN_API + '/contract/approvalContract', params),
+  getById: (id) => http.get(`${COMMON_ADMIN_API}/contract/${id}`)
 }

@@ -132,3 +132,61 @@ export const FollowUpMethodList: { [key in FollowUpMethod]: EnumInfo } = {
   [FollowUpMethod.WECHAT]: { value: 2, label: '微信' },
   [FollowUpMethod.SMS]: { value: 3, label: '短信' }
 }
+export enum PaymentStatus {
+  PENDING_SUBMIT, // 待提交
+  PENDING_REVIEW, // 待审核
+  APPROVED, // 审核通过
+  REJECTED // 审核拒绝
+}
+
+/**
+ * 回款状态 - 文本映射
+ */
+export const PaymentStatusList: { [key in PaymentStatus]: EnumInfo } = {
+  [PaymentStatus.PENDING_REVIEW]: { value: 1, label: '待审核' },
+  [PaymentStatus.APPROVED]: { value: 2, label: '审核通过' },
+  [PaymentStatus.REJECTED]: { value: 3, label: '审核拒绝' }
+}
+
+/**
+ * 支付方式枚举
+ */
+export enum PaymentMethod {
+  BANK_TRANSFER, // 银行转账
+  ALIPAY, // 支付宝
+  WECHAT_PAY, // 微信支付
+  CASH // 现金
+}
+
+/**
+ * 支付方式 - 文本映射
+ */
+export const PaymentMethodList: { [key in PaymentMethod]: EnumInfo } = {
+  [PaymentMethod.BANK_TRANSFER]: { value: 1, label: '银行转账' },
+  [PaymentMethod.ALIPAY]: { value: 2, label: '支付宝' },
+  [PaymentMethod.WECHAT_PAY]: { value: 3, label: '微信支付' },
+  [PaymentMethod.CASH]: { value: 4, label: '现金' }
+}
+export enum ApprovalTypeEnum {
+  PASS = 1,
+  REJECT = 2
+}
+
+export enum PaymentStatusEnum {
+  WAIT = 1,
+  PASS = 2,
+  REJECT = 3
+}
+
+// 使用 as const 断言创建不可变的映射对象，这在类型推导上有优势
+export const PaymentStatusTextEnum = {
+  [PaymentStatusEnum.WAIT]: '待审核',
+  [PaymentStatusEnum.PASS]: '已通过',
+  [PaymentStatusEnum.REJECT]: '已拒绝'
+} as const
+
+export const PaymentStatusTypeEnum = {
+  [PaymentStatusEnum.WAIT]: 'warning',
+  [PaymentStatusEnum.PASS]: 'success',
+  [PaymentStatusEnum.REJECT]: 'danger'
+} as const

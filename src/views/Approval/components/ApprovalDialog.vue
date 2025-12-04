@@ -57,7 +57,7 @@ const rules = {
 const formRef = ref<InstanceType<typeof ElForm>>()
 
 // 弹窗标题
-const dialogTitle = props.approvalType === 2 ? '审核通过' : '审核不通过'
+const dialogTitle = props.approvalType === 0 ? '审核通过' : '审核不通过'
 
 // 提交审核
 const handleSubmit = async () => {
