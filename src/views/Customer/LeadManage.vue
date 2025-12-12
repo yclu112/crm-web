@@ -21,7 +21,7 @@
           link
           :icon="Notification"
           v-hasPermi="['sys:lead:follow']"
-          @click="openFollowDrawer('编辑', scope.row)"
+          @click="openFollowDrawer('跟进线索', scope.row)"
           v-if="scope.row.status === LeadStatus.NOT_CONVERTED"
           >跟进线索</el-button
         >

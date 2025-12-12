@@ -42,7 +42,7 @@
       <template v-if="approvalType === ApprovalTypeEnum.REJECT">
         <el-form-item label="实际回款金额" prop="actualAmount">
           <el-input v-model.number="form.actualAmount" type="number" placeholder="请输入本次实际收到的金额" suffix="元" step="0.01" />
-          <div class="form-hint">提示：金额需大于0且不超过应回款金额</div>
+          <!-- <div class="form-hint">提示：金额需大于0且不超过应回款金额</div> -->
         </el-form-item>
         <el-form-item label="拒绝原因" prop="comment">
           <el-input v-model="form.comment" type="textarea" rows="3" maxlength="200" show-word-limit placeholder="请填写拒绝原因（审核不通过时必填）" />
